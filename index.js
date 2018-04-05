@@ -1,6 +1,4 @@
 
-							/////////////-----------------------Attention à modifier Doolf par Oukilai !! --------------///
-
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 
@@ -135,6 +133,5 @@ bot.on("message", (message) => {
 
 
 
-bot.login("NDI0OTAwODY3NDU2NDk5NzI0.DZZEnA.y9UzItnjT9NiRNpZ8NIShk_koOI");
-//NDMxNDMyOTMzNjg2MTE2MzYy.DaertQ.gw20rgYZi2XiVWYSCcr3FOgyjgI
+bot.login(process.env.TOKEN);
 
