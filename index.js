@@ -55,12 +55,7 @@ bot.on("message", (message) => {
 					var secondpart = split.indexOf('return');
 					var endpart = split.indexOf('end');
 
-					if ((!split.indexOf('start')) || (!split.indexOf('return')) || (!split.indexOf('end')))
-						{
-							messag.channel.send('')
-						}
-
-					else
+					if ((split.indexOf('start')) && (split.indexOf('return')) && (split.indexOf('end')))
 						{
 							var start = '';
 							var retour = '';
@@ -90,6 +85,11 @@ bot.on("message", (message) => {
 								}
 							reponses[temoin] = retour;
 							temoin++;
+						}
+
+					else
+						{
+							var variablequinesertetquineserviraarien = 0;
 						}
 	    		}
 
