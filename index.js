@@ -55,7 +55,7 @@ bot.on("message", (message) => {
 					var secondpart = split.indexOf('return');
 					var endpart = split.indexOf('end');
 
-					if ((split.indexOf('start')) && (split.indexOf('return')) && (split.indexOf('end')))
+					if ((split.indexOf('start') >= 0) && (split.indexOf('return') >= 0) && (split.indexOf('end') >= 0))
 						{
 							var start = '';
 							var retour = '';
