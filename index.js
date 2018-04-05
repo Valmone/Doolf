@@ -24,7 +24,7 @@ bot.on("message", (message) => {
 					message.channel.send({embed: {
 						title: 'Liste des commandes:',
 						color: 	3447003,
-						description: '\n%help\n\n%liste\n\n%learn start [le mot ou la phrase auquel le bot doit réagir] return [la réaction du bot] end\n/!\\Pour le moment, le bot ne peut notifier un joueur/!\\'
+						description: '\n%help\n\n%liste\n\n%learn start [le mot ou la phrase auquel le bot doit réagir] return [la réaction du bot] end\n/!\\Pour le moment, le bot n\'a pas la possibilité de savoir qui écrit le message/!\\'
 					}});
 				}else{}
 		} else
