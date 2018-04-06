@@ -19,7 +19,7 @@ temoin = 0;
 bot.on("message", (message) => {
 
 	if (message.content.startsWith(prefix + "help"))		{
-			if ((!message.member.roles.find("name", "Oukilai")) || (!message.member.roles.find("name", "Doolf")))
+			if ((!message.member.roles.find("name", "Oukilai")) && (!message.member.roles.find("name", "Doolf")))
 				{
 					message.channel.send({embed: {
 						title: 'Liste des commandes:',
@@ -30,7 +30,7 @@ bot.on("message", (message) => {
 		} else
 
 	if (message.content.startsWith(prefix + "liste"))		{
-			if ((!message.member.roles.find("name", "Oukilai")) || (!message.member.roles.find("name", "Doolf")))
+			if ((!message.member.roles.find("name", "Oukilai")) && (!message.member.roles.find("name", "Doolf")))
 				{
 					var rep = '';
 					for (var i = 0; i < temoin; i++)
@@ -48,7 +48,7 @@ bot.on("message", (message) => {
 	
 	if (message.content.startsWith(prefix + "learn"))
 		{
-			if ((!message.member.roles.find("name", "Oukilai")) || (!message.member.roles.find("name", "Doolf")))
+			if ((!message.member.roles.find("name", "Oukilai")) && (!message.member.roles.find("name", "Doolf")))
 				{
 		    		var split = message.content.split(" ");
 					var firstpart = split.indexOf('start');
@@ -97,7 +97,7 @@ bot.on("message", (message) => {
 		} else
 
 	if ((questions) && (reponses)) {
-		if ((!message.member.roles.find("name", "Oukilai")) || (!message.member.roles.find("name", "Doolf"))) {
+		if ((!message.member.roles.find("name", "Oukilai")) && (!message.member.roles.find("name", "Doolf"))) {
 
 			var retourdesemplacementsdei = new Array();
 			var o = 0;
