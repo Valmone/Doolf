@@ -1,4 +1,5 @@
 
+
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 
@@ -111,15 +112,10 @@ bot.on("message", (message) => {
 					{
 						message.channel.send(reponses[retourdesemplacementsdei[0]]);
 					}	
-			}
-			else{}
-		}
+			}else{}
+	}
 	else{}
 
-}
-
-
 });
-
 bot.login(process.env.TOKEN);
 
