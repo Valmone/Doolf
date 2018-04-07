@@ -1,6 +1,4 @@
 
-
-
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 
@@ -20,117 +18,108 @@ temoin = 0;
 
 bot.on("message", (message) => {
 
-	if (message.content.startsWith(prefix + "help"))		{
-			if (!message.author.bot)
-				{
-					message.channel.send({embed: {
-						title: 'Liste des commandes:',
-						color: 	3447003,
-						description: '\n%help\n\n%liste\n\n%learn start [le mot ou la phrase auquel le bot doit réagir] return [la réaction du bot] end\n/!\\Pour le moment, le bot n\'a pas la possibilité de savoir qui écrit le message/!\\'
-					}});
-				}else{}
-		} else
-
-	if (message.content.startsWith(prefix + "liste"))		{
-			if (!message.author.bot)
-				{
-					var rep = '';
-					for (var i = 0; i < temoin; i++)
-						{
-							rep = rep + '\n' + questions[i] + ' -> ' + reponses[i] + '\n';
-						}
-					message.channel.send({embed: {
-						title: 'Liste des réactions du bot ainsi que son déclencheur:',
-						color: 	3447003,
-						description: rep
-					}});
-				}
-			else{}
-		} else
-	
-	if (message.content.startsWith(prefix + "learn"))
+	if (!message.author.bot)
 		{
-			if (!message.author.bot)
-				{
-		    		var split = message.content.split(" ");
-					var firstpart = split.indexOf('start');
-					var secondpart = split.indexOf('return');
-					var endpart = split.indexOf('end');
+		if (message.content.startsWith(prefix + "help"))		{
+				message.channel.send({embed: {
+					title: 'Liste des commandes:',
+					color: 	3447003,
+					description: '\n%help\n\n%liste\n\n%learn start [le mot ou la phrase auquel le bot doit réagir] return [la réaction du bot] end\n/!\\Pour le moment, le bot n\'a pas la possibilité de savoir qui écrit le message/!\\'
+				}});
+				
+			} else
 
-					if ((split.indexOf('start') >= 0) && (split.indexOf('return') >= 0) && (split.indexOf('end') >= 0))
-						{
-							var start = '';
-							var retour = '';
-							for (var i = 1; i < secondpart-firstpart; i++)
-								{
-									if (start === '')
-										{
-											start = split[firstpart+i];
-										}
-									else
-										{
-											start = start + ' ' + split[firstpart+i];
-										}
-								}
-							questions[temoin] = start;
+		if (message.content.startsWith(prefix + "liste"))		{
+				var rep = '';
+				for (var i = 0; i < temoin; i++)
+					{
+						rep = rep + '\n' + questions[i] + ' -> ' + reponses[i] + '\n';
+					}
+				message.channel.send({embed: {
+					title: 'Liste des réactions du bot ainsi que son déclencheur:',
+					color: 	3447003,
+					description: rep
+				}});
+			} else
+		
+		if (message.content.startsWith(prefix + "learn"))
+			{
+	    		var split = message.content.split(" ");
+				var firstpart = split.indexOf('start');
+				var secondpart = split.indexOf('return');
+				var endpart = split.indexOf('end');
 
-							for (var i = 1; i < endpart-secondpart; i++)
-								{
-									if (retour === '')
-										{
-											retour = split[secondpart+i]
-										}
-									else
-										{
-											retour = retour + ' ' + split[secondpart+i]
-										}
-								}
-							reponses[temoin] = retour;
-							temoin++;
-						}
+				if ((split.indexOf('start') >= 0) && (split.indexOf('return') >= 0) && (split.indexOf('end') >= 0))
+					{
+						var start = '';
+						var retour = '';
+						for (var i = 1; i < secondpart-firstpart; i++)
+							{
+								if (start === '')
+									{
+										start = split[firstpart+i];
+									}
+								else
+									{
+										start = start + ' ' + split[firstpart+i];
+									}
+							}
+						questions[temoin] = start;
 
-					else
-						{
-							var variablequinesertetquineserviraarien = 0;
-						}
-	    		}
+						for (var i = 1; i < endpart-secondpart; i++)
+							{
+								if (retour === '')
+									{
+										retour = split[secondpart+i]
+									}
+								else
+									{
+										retour = retour + ' ' + split[secondpart+i]
+									}
+							}
+						reponses[temoin] = retour;
+						temoin++;
+					}
 
-    		else{}
-		} else
+				else
+					{
+						var variablequinesertetquineserviraarien = 0;
+					}
+    		}else
 
-	if ((questions) && (reponses)) {
-		if (!message.author.bot)
-
-			var retourdesemplacementsdei = new Array();
-			var o = 0;
-			for (var i = 0; i < temoin; i++)
-				{
-					
-					if (message.content.search(questions[i]) >= 0)
-						{
-							retourdesemplacementsdei[o] = i;
-							o++;
-						}
-					else{}					
-				}
-			
-			if (retourdesemplacementsdei.length > 1)
-				{
-					var x = Math.floor((Math.random() * retourdesemplacementsdei.length) + 1);
-					message.channel.send(reponses[retourdesemplacementsdei[x-1]]);
-				}
-			else
-				{
-					message.channel.send(reponses[retourdesemplacementsdei[0]]);
-				}	
+		if ((questions) && (reponses))
+			{
+				var retourdesemplacementsdei = new Array();
+				var o = 0;
+				for (var i = 0; i < temoin; i++)
+					{
+						
+						if (message.content.search(questions[i]) >= 0)
+							{
+								retourdesemplacementsdei[o] = i;
+								o++;
+							}
+						else{}					
+					}
+				
+				if (retourdesemplacementsdei.length > 1)
+					{
+						var x = Math.floor((Math.random() * retourdesemplacementsdei.length) + 1);
+						message.channel.send(reponses[retourdesemplacementsdei[x-1]]);
+					}
+				else
+					{
+						message.channel.send(reponses[retourdesemplacementsdei[0]]);
+					}	
+			}
+			else{}
 		}
-		else{}
-		}
+	else{}
 
-
-
+}
 
 
 });
+
 bot.login(process.env.TOKEN);
 
