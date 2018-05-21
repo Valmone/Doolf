@@ -1,63 +1,117 @@
-
-
-
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 
-var request = require("request"),
-    cheerio = require("cheerio");
 
-const translate = require('google-translate-api');
-
-
-
-/*var CurrentURL = window.location.href;
-		if(CurrentURL.search('messages') >= 0)*/
 
 
 bot.on("ready", () => {
-	console.log("I am ready!");
-	bot.user.setActivity('KESKEJESUIPACON');	
+  console.log("I am ready!");
+  bot.user.setActivity('rien du tout | %help');
 });
 
-const prefix = "_";
+const prefix = "%";
+
+var questions = new Array(),
+reponses = new Array(),
+temoin = 0;
 
 bot.on("message", (message) => {
-	
+
 	if (!message.author.bot)
 		{
-			if (message.content.startsWith(prefix + "ping"))	{
-			    	message.channel.send("pong!");
-				} else
+		if (message.content.startsWith(prefix + "help"))		{
+				message.channel.send({embed: {
+					title: 'Liste des commandes:',
+					color: 	3447003,
+					description: '\n%help\n\n%liste\n\n%learn start [le mot ou la phrase auquel le bot doit réagir] return [la réaction du bot] end\n/!\\Pour le moment, le bot n\'a pas la possibilité de savoir qui écrit le message/!\\'
+				}});
+				
+			} else
 
-			if (message.content.startsWith(prefix + "eo"))
-				{
-					message.delete();
-					var msg = message.content.replace('_eo ', '');
+		if (message.content.startsWith(prefix + "liste"))		{
+				var rep = '';
+				for (var i = 0; i < temoin; i++)
+					{
+						rep = rep + '\n' + questions[i] + ' -> ' + reponses[i] + '\n';
+					}
+				message.channel.send({embed: {
+					title: 'Liste des réactions du bot ainsi que son déclencheur:',
+					color: 	3447003,
+					description: rep
+				}});
+			} else
+		
+		if (message.content.startsWith(prefix + "learn"))
+			{
+	    		var split = message.content.split(" ");
+				var firstpart = split.indexOf('start');
+				var secondpart = split.indexOf('return');
+				var endpart = split.indexOf('end');
 
-					translate(msg, {from: 'fr', to: 'ht'}).then(res => {
-					    message.channel.send({embed: {
-							color: 	2551650,
-							title: message.author.username + ' a dit:',
-							description: res.text
-						}});
-					    
+				if ((split.indexOf('start') >= 0) && (split.indexOf('return') >= 0) && (split.indexOf('end') >= 0))
+					{
+						var start = '';
+						var retour = '';
+						for (var i = 1; i < secondpart-firstpart; i++)
+							{
+								if (start === '')
+									{
+										start = split[firstpart+i];
+									}
+								else
+									{
+										start = start + ' ' + split[firstpart+i];
+									}
+							}
+						questions[temoin] = start;
 
-					    /*//=> Ik spreek Nederlands!
-					    console.log(res.from.text.autoCorrected);
-					    //=> true
-					    console.log(res.from.text.value);
-					    //=> I [speak] Dutch!
-					    console.log(res.from.text.didYouMean);
-					    //=> false*/
-					}).catch(err => {
-					    console.error(err);
-					});
+						for (var i = 1; i < endpart-secondpart; i++)
+							{
+								if (retour === '')
+									{
+										retour = split[secondpart+i]
+									}
+								else
+									{
+										retour = retour + ' ' + split[secondpart+i]
+									}
+							}
+						reponses[temoin] = retour;
+						temoin++;
+					}
 
+				else
+					{
+						var variablequinesertetquineserviraarien = 0;
+					}
+    		}else
 
-				    
-				}
-		}
+		if ((questions) && (reponses))
+			{
+				var retourdesemplacementsdei = new Array();
+				var o = 0;
+				for (var i = 0; i < temoin; i++)
+					{
+						
+						if (message.content.search(questions[i]) >= 0)
+							{
+								retourdesemplacementsdei[o] = i;
+								o++;
+							}
+						else{}					
+					}
+				
+				if (retourdesemplacementsdei.length > 1)
+					{
+						var x = Math.floor((Math.random() * retourdesemplacementsdei.length) + 1);
+						message.channel.send(reponses[retourdesemplacementsdei[x-1]]);
+					}
+				else
+					{
+						message.channel.send(reponses[retourdesemplacementsdei[0]]);
+					}	
+			}else{}
+	}
 	else{}
 });
 bot.login(process.env.TOKEN);
